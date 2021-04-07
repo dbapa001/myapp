@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html>
+
+  <head>
+
+    <title>list</title>
+
+	<link rel="stylesheet" type="text/css" href="./style/style.css"/>
+
+  </head>
+
+    <h1> Calorie Buddy </h1>
+
+<body>
+
+
+<h2> List Page</h2>
+
+
+
+	<a href= '/'>Home</a>
+
+                                                                                                                                                                                                                  
+
+	<a href='/about'>About </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/register'>Register </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/login'>Login <a>
+
+                                                                                                                                                                                                                  
+
+<a href='/addfood'>Add Food </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/search'>Search Food</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/update'>Update Food</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/list'>Food List </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/api'>Api </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/logout'>Logout </a>
+
+
+
+<br>   <h3>You can see names and the nutritional facts here:</h3>                                                                                                     
+                                                                                                       
+                                                                                                       
+
+
+<ul>
+                                                                                                                                                              
+                                                                                                     
+              <% availablefood.forEach(function(food){ %>
+                                                                                                       
+                                                                                                       
+                                                                                                  
+              <li> Name: <%= food.name %>,
+		 Amount: <%= food.amount %>,
+		 Unit: <%= food.unit %>,
+		 Calorie: <%= food.calories %>,
+		 Carbs: <%= food.carbs %>,
+		 Fat: <%= food.fat %>,
+		 Protein: <%= food.protein %>,
+		 salt: <%= food.salt %>,
+		 Suger: <%= food.sugar %> <br> </li>
+
+<br>
+                                                                                                       
+                                                                                                      
+                                                                                                       
+             <% }) %> 
+														<ul>
+
+
+  </body>                                                                 
+                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                          
+                                                                                                                                    
+                                                                                                                                          
+                                                                                                                                           
+                                                                                                                                      
+</html>

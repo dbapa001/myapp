@@ -1,0 +1,270 @@
+body{
+
+	margin: 0;
+
+	padding: 0;
+
+	font-family:sans-serif;
+	
+
+    
+
+}
+
+
+
+/*top Heading*/
+
+h1{
+
+	color: #eb8360; 
+
+	text-align: center;
+
+	padding: 0;
+
+	background-repeat: no-repeat;
+
+	width: 100hv;
+	background-color: #ffffff;
+
+	padding-top: 5px;
+
+	font-family:serif;
+
+	font-style: italic;
+
+	text-decoration:underline;
+
+	font-size: 4em;
+	
+};
+
+
+
+h2{
+
+	color: black; 
+
+	text-align: center;
+
+	padding: 20px;
+
+	font-family:serif;
+
+	font-style: italic;
+
+	text-decoration:underline;
+
+	font-size: 3em;
+
+};
+
+
+nav{
+
+    color: black;
+
+    text-decoration: underline;
+
+    padding: 5px 20px;
+
+    font-family: poppins;
+
+    font-size: 20px;
+
+    background-color: aqua;
+
+    
+
+    
+
+}
+
+
+/*footer*/
+
+footer{
+
+	display: block;
+
+	width: 100%;
+
+	height: 10px;
+
+	position: absolute;
+
+	text-align: center;
+
+}
+
+footer .reference{
+
+	
+
+	color: black;
+
+	height: 30px;
+
+	width: 100%;
+
+	text-align: center;
+
+	font-size: .8em;
+
+	border-top: 0.3px;
+
+	margin-top: 0.3px;
+
+}
+
+.about{
+
+	padding: 1px 40px;
+
+	text-align: center;
+
+	font-size: 1.1em;
+
+}
+
+
+
+ul1{
+
+    float: right;
+
+    list-style: armenian;
+
+    margin-top: 0px;
+
+    
+
+}
+
+
+
+ul1 li{
+
+    display: inline-block;
+
+}
+
+
+
+ul1 li a{
+
+    color: black;
+
+    padding: 5px 20px;
+
+    font-family: poppins;
+
+    font-size: 20px;
+
+    
+
+}
+
+
+
+ul{
+
+	margin-left: 30px;
+
+	padding-left :10px;
+
+	color: black;
+
+	list-style: none;
+
+	list-style-type: none;
+
+	font-family: serif;
+
+	border-top-color: black;
+
+	border-top: 0.5px;
+
+	margin-top: 0.6px;
+	
+
+
+};
+
+
+
+ul li{
+
+	display:;
+
+	margin-top: 5px;
+
+    list-style: none;
+
+	background-color: #965944
+
+
+}
+
+
+
+ul li a{
+
+	display:block;
+
+	color: white;
+
+	text-align: center;
+
+	padding: 20px 20px;
+
+	transition: 0.6s ease;
+
+}
+
+a:hover{
+
+	color: red;} /*when mouse is in top make it red*/
+
+
+
+
+
+
+
+p{
+
+	text-align: left;
+
+	text-decoration-color: black;
+
+	/*float: left;*/
+
+	margin: 20px 20px;
+
+	padding: 10px 20px;
+
+	color: black;
+
+    font-style: normal;
+
+}
+
+
+
+
+
+form{
+
+	text-align: center;
+
+    padding-right: 20px;
+
+	font-style:normal;
+
+    padding-bottom: 10px;
+
+	
+
+}

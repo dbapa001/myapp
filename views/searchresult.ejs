@@ -1,0 +1,93 @@
+<!doctype html>
+
+                                                                          
+
+<html>
+
+                                                                          
+
+  <head>
+
+                                                                          
+
+    <title>search result</title>
+
+<link rel="stylesheet" type="text/css" href="./style/style.css"/>                                                                          
+
+  </head>
+
+                                                                          
+
+    <h1>Calorie Buddy</h1>
+
+                                                                          
+
+<body>
+
+<h2>Search Result Page</h2>
+
+<a href= '/'>Home</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/about'>About </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/register'>Register </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/login'>Login <a>
+
+                                                                                                                                                                                                                  
+
+<a href='/addfood'>Add Food </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/search'>Search Food</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/update'>Update Food</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/list'>Food List </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/api'>Api </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/logout'>Logout </a>
+
+         <br> <br>  <h3>The result of the food you are looking for: </h3>
+
+                                                                          
+
+            <ul>
+
+                                                                          
+
+              <% availablefood.forEach(function(food){ %>
+
+                                                                          
+
+              <li> name: <%= food.name %>, Amount: <%= food.amout %>, Unit: <%= food.unit %>, Calorie: <%= food.calorie %>, Carbs: <%= food.carbs %>, Fat: <%= food.fat %>, Protein: <%= food.protein %>, salt: <%= food.salt %>, Suger: <%= food.suger %> </li>
+
+                                                                          
+
+             <% }) %>
+
+                                                                          
+
+            </ul>
+
+                                                                          
+
+  </body>                                      
+
+</html>
