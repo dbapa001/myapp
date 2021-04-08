@@ -1,7 +1,6 @@
 //Express framwork
 var express = require ('express')
 var bodyParser = require ('body-parser')
-var pug = require ('pug')
 var session = require('express-session');
 var validator = require ('express-validator');
 

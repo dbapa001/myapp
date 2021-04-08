@@ -1,30 +1,20 @@
 <!doctype html>
-
-                                                                          
-
 <html>
-
-                                                                          
-
   <head>
-
-                                                                          
 
     <title>search result</title>
 
 <link rel="stylesheet" type="text/css" href="./style/style.css"/>                                                                          
 
   </head>
-
+<body>
                                                                           
 
     <h1>Calorie Buddy</h1>
 
-                                                                          
+                                                                        
 
-<body>
-
-<h2>Search Result Page</h2>
+<nav>
 
 <a href= '/'>Home</a>
 
@@ -38,7 +28,7 @@
 
                                                                                                                                                                                                                   
 
-<a href='/login'>Login <a>
+<a href='/login'>Login </a>
 
                                                                                                                                                                                                                   
 
@@ -64,27 +54,49 @@
 
 <a href='/logout'>Logout </a>
 
-         <br> <br>  <h3>The result of the food you are looking for: </h3>
+</nav>
 
-                                                                          
+<section class="contentSection">
+  <h3>SEARCH RESULT PAGE</h3>
 
-            <ul>
+      <p>The result of the food you are looking for: </p>
 
-                                                                          
 
-              <% availablefood.forEach(function(food){ %>
+      <table style="width: 100%">
+				<tr>
+					<th>Food Name</th>
+					<th>Unit</th>
+					<th>Calorie</th>
+					<th>Carbs</th>
+					<th>Fat</th>
+					<th>Protein</th>
+					<th>Salt</th>
+					<th>Sugar</th>
+				</tr>
 
-                                                                          
+				<% availablefood.forEach(function(food){ %>
 
-              <li> name: <%= food.name %>, Amount: <%= food.amout %>, Unit: <%= food.unit %>, Calorie: <%= food.calorie %>, Carbs: <%= food.carbs %>, Fat: <%= food.fat %>, Protein: <%= food.protein %>, salt: <%= food.salt %>, Suger: <%= food.suger %> </li>
+				<tr>
+					<td> <%= food.name %> </td>
+					<td> <%= food.unit %> </td>
+					<td> <%= food.calories %> </td>
+					<td> <%= food.carbs %> </td>
+					<td> <%= food.fat %> </td>
+					<td> <%= food.protein %> </td>
+					<td> <%= food.salt %> </td>
+					<td> <%= food.sugar %> </td>
 
-                                                                          
+				</tr>
+                                                                                                                                                                                             
+                                                                                                       
+             <% }) %> 
+						
+			</table>
 
-             <% }) %>
 
-                                                                          
 
-            </ul>
+
+</section>
 
                                                                           
 

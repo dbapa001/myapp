@@ -1,8 +1,7 @@
 module.exports = function (app) {
 
+    //login in session
 const redirectLogin = (req, res, next) => {
-
-
 
    if (!req.session.userId ) {
 
@@ -13,7 +12,6 @@ const redirectLogin = (req, res, next) => {
    }
 
 const { check, validationResult } = require('express-validator');
-
 
 
 
@@ -30,8 +28,7 @@ const { check, validationResult } = require('express-validator');
         res.render('about.html');
     });
 
-
-
+//------ search page -----
 //conect url /search to search.html
     app.get('/search', function (req, res) {
         res.render("search.html");
@@ -51,17 +48,17 @@ const { check, validationResult } = require('express-validator');
         //if there is any error it will show that   
 	 if (err) throw err;
 
- 	    //check form mybookshopdb database
+ 	    //check form myappdb database
             var db = client.db('myappdb');
 
-	    //collect from books where name is user given word
+	    //collect from food where name is user given word
             db.collection('food').find({
                 name: new RegExp(req.query.keyword)
             }).toArray((findErr, result) => {
                 if (findErr) throw findErr;
 
                 else
-		   //if the search word match it will show to the searchresult page
+		//if the search word match it will show to the searchresult page
                     res.render('searchresult.ejs', {
                         availablefood: result
                     });
@@ -71,61 +68,154 @@ const { check, validationResult } = require('express-validator');
             });
         });
     });
+//------- search page done--------
 
 
+//------- update page ------------
 
-//weather page
+//conect url /update to update.html
+app.get('/update',redirectLogin, function (req, res) {
+    res.render("update.html");
+});
 
-app.get('/weatherform', function (req, res) {
 
-        res.render("weatherform.html");
+//update results (comapare the food to tha database)
+app.get('/updatefood',redirectLogin, function (req, res) {
+
+	//connect to mongodb
+        var MongoClient = require('mongodb').MongoClient;
+
+        var url = 'mongodb://localhost';
+
+        MongoClient.connect(url, function (err, client) {
+
+        //if there is any error it will show that   
+	 if (err) throw err;
+
+ 	    //check form myappdb database
+            var db = client.db('myappdb');
+
+	    //collect from food where name/keyword is user given word
+            db.collection('food').findOne({
+                "name": req.query.keyword
+            },(findErr, result) => {
+                if (findErr) throw findErr;
+
+                else
+                if(result!=null){
+                    //if the search word match it will show to the searchresult page
+                    res.render('updateresult.ejs', {
+                        food: result
+                    });
+                }else{
+                    
+                    res.render("message.ejs",{title:"Sorry", message:"Food"+ req.query.keyword+" can not found!"});
+                }
+
+
+		//close the database
+                client.close();
+            });
+        });
+    });
+
+
+    //update selected food
+app.post("/updateSelectedFood",redirectLogin, function(req,res){
+
+        var MongoClient = require('mongodb').MongoClient;
+    
+        var url = 'mongodb://localhost';
+
+
+        //connect mongobd
+        MongoClient.connect(url, function (err, client) {
+
+            //throw error
+            if(err) throw err;
+
+            else{
+            //use myappdb database
+            var db = client.db('myappdb');
+            db.collection("food").findOne({"name":req.body.name},function(err,result){
+                if(err) throw err;
+                if(result.user==req.session.userId){                    
+                    //collect user and remove that user and their details from the database
+                    db.collection("food").updateOne({"name" : req.body.name}, {$set:{"name":req.body.name,
+                                    "unit":req.body.unit,
+                                    "calories":req.body.calories,
+                                    "carbs": req.body.carbs,
+                                    "fat":req.body.carbs,
+                                    "protein":req.body.protein,
+                                    "salt":req.body.salt,
+                                    "sugar":req.body.sugar}},function(err, result){
+                    if(err) throw err;
+                    //send a confirm message
+                    res.render("message.ejs",{title:"Done!", message:"Food"+ req.body.name+"has been updated"});
+
+                    });
+                }else{
+                    
+                    res.render("message.ejs",{title:"Sorry", message:"only "+ result.user+" can update this!"});
+                }
+
+                //close database
+                client.close();
+            })
+            }     
+
+        });
+});
+
+//delet prossage and confirmation
+app.post('/deleteSelectedFood',redirectLogin, function(req,res){
+
+    var MongoClient = require('mongodb').MongoClient;
+
+    var url = 'mongodb://localhost';
+
+  //connect mongobd
+    MongoClient.connect(url, function (err, client) {
+
+        //throw error
+        if(err) throw err;
+
+        else{
+            //use myappdb database
+            var db = client.db('myappdb');
+
+
+            db.collection("food").findOne({"name":req.body.name},function(err,result){
+                if(err) throw err;
+                if(result.user==req.session.userId){                    
+                    //collect user and remove that user and their details from the database
+                    db.collection("food").deleteOne({"name" : req.body.name},(err, result)=>{
+                            if(err) throw err;
+                            //send a confirm message
+                            res.render("message.ejs",{title:"FOOD ADDED", message:"Food "+ req.body.name+" has been removed from the system"});                          
+                    });
+                }else{
+                    //send a reject message
+                    
+                    res.render("message.ejs",{title:"Sorry", message:"only"+ result.user+" can update this!"});
+                }
+
+                //close database
+                client.close();
+            })
+
+        }     
 
     });
- 
-app.get('/weather', function (req, res) {
-
-         //searching in the database
-	const request = require('request');
-
-          
-
-let apiKey = '14e8c54d25efcba92c926ab517106185';
-
-let city = req.query.city;
-
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
-             
-
-request(url, function (err, response, body) {
-
-  if(err){
-
-    console.log('error:', error);
-
-  } else {
-
-    var weather = JSON.parse(body)
-
-    var wmsg = "<br> <a href= '/'>Home</a> <a href= '/register'>Register</a> <a href= '/login'>Login</a> <a href= '/weatherform'>Weather</a> <a href= '/api'>API</a>"+'<br> <br> It is '+ weather.main.temp + ' degrees in '+ weather.name +'! <br> Feels like: ' + weather.main.feels_like + '<br> Humidity now is:'+ weather.main.humidity + '<br> The wind is: ' + weather.wind.speed;
-
-
-
-    res.send (wmsg);
-
-//    res.send(body);
-
-  } 
 
 });
 
-});
-      
-     
-/////weather done////
+
+///--------- update done ------------
 
 
-////api////
+
+//---------- api ----------------
 
 app.get('/api', function (req,res) {
 
@@ -155,10 +245,11 @@ app.get('/api', function (req,res) {
 
 });
 
+//---------- api done --------
 
 
+//---------- list -------------
 
-///////api done/////
 //conect /list to list.html
 	//connect mongodb 
     app.get('/list', function (req, res) {
@@ -170,10 +261,10 @@ app.get('/api', function (req,res) {
 	//throw error 
             if (err) throw err;
 
-	//check data from my bookshopdb database
+	//check data from myappdb database
             var db = client.db('myappdb');
 
-	//collect books and show as list 
+	//collect food and show as list 
             db.collection('food').find().toArray((findErr, results) => {
                 if (findErr) throw findErr;
 
@@ -188,42 +279,15 @@ app.get('/api', function (req,res) {
         });
     });
 
-
-//userlist page
-    app.get('/listusers', function (req, res) {
-
-       //connect mongodb
-        var MongoClient = require('mongodb').MongoClient;
-
-        var url = 'mongodb://localhost';
-        MongoClient.connect(url, function (err, client) {
-
-	 //throw error
-            if (err) throw err;
-
-	 // check data from mybookshopsdb database
-            var db = client.db('myappdb');
-
-	 //collect user and add to the listuser
-            db.collection('user').find().toArray((findErr, results) => {
-                if (findErr) throw findErr;
-
-                else
-                    res.render('listusers.ejs', {
-                        users: results
-                    });
-		//close database
-                client.close();
-            })
-        })
-    })
+    //--------- list done --------------
 
 
+//------------- register ----------------
+    
 //conncet url /register to register.html
     app.get('/register', function (req, res) {
         res.render('register.html');
     });
-
 
 //registerd page, when user register show the confirmation
     app.post('/registered',[check('email').isEmail(),check('password').not().isEmpty().isLength({min: 8})], function (req, res) {
@@ -238,9 +302,6 @@ app.get('/api', function (req,res) {
 
 
           res.redirect('./register'); }
-
-
-
 
        else {
 
@@ -264,12 +325,12 @@ app.get('/api', function (req,res) {
 		//throw error
                     if (err) throw err;
 
-		//collect user and save users name, username and hassed password in mybookshopdb 
+		//collect user and save users name, username and hassed password in myappdb 
                     var db = client.db('myappdb');
                    db.collection('user').insertOne({
                        name: req.body.first,
-			lastname: req.body.last,
-			username: req.body.username,
+                        lastname: req.body.last,
+                        username: req.body.username,
                         email: req.body.email,
                         password: hashedPassword
                     });
@@ -277,13 +338,17 @@ app.get('/api', function (req,res) {
 		//close database
                     client.close();
 
-		//confirm the register with massage
-                    res.send('Hello '+ req.body.first + ', You are now registered, Your user name is: ' + req.body.username + ' your password is: ' + req.body.password + ' and your hashed password is: ' + hashedPassword+"<br><a href='./'>Home</a> <a href ='./login'>Login</a>");
+		        //confirm the register with massage
+                   res.render("message.ejs",{title:"WELCOME!", message:'Hello '+ req.body.first + ', You are now registered, Your user name is: ' + req.body.username + ' your password is: ' + req.body.password + ' and your hashed password is: ' + hashedPassword});
                 });
             });
    
 }
 });
+//----------------- register done --------------------
+
+
+//----------------- login ---------------------
 
 //connect /login to login.html
     app.get('/login', function (req, res) {
@@ -307,7 +372,7 @@ app.get('/api', function (req,res) {
 	  //throw error
             if (err) throw err;
 
-	  // use mybookshopdb database
+	  // use myappdb database
             var db = client.db('myappdb');
 
          //collect user where the give name
@@ -318,7 +383,8 @@ app.get('/api', function (req,res) {
 		//if user don't entre anything send an error massage
                 if(result.length==0){
                        console.log(result)
-			res.send("ACCESS DENIED ");
+                       res.render("message.ejs",{title:"ACCESS DENIED!", message:""});
+
                 }
 
 		//compare the username and password from the database and given  
@@ -332,11 +398,12 @@ app.get('/api', function (req,res) {
 			   // **** save user session here, when login is successful
 
 			   req.session.userId = req.body.username;//lab7
-                            res.send("  WELCOME! "+"<br><a href='./'>Home</a>"+"<a href='/addfood'>Add Food</a> <a href= '/list'>Food List</a> <a href= '/search'>Search Food</a> ")
-
+                            res.render("message.ejs",{title:"Welcome!", message:"welcome back "+ req.body.username});
+                            
                         } else {
 		//if the password or username doesn't match user get error me
-                            res.send(" ACCESS DENIED  MESSAGE"+"<br><a href='./'>Home</a>")
+                            
+                        res.render("message.ejs",{title:"ACCESS DENIED!", message:"Wrong username or password"});
                         }
                     })
 
@@ -348,50 +415,10 @@ app.get('/api', function (req,res) {
     });
 
 
-//connect url: /deleteuser to deleteuser.html
-app.get('/deleteuser', function (req, res) {
-
-        res.render('deleteuser.html');
-
-    });
+//------------ login done -------------------
 
 
-//delet prossage and confirmation
-app.post('/deleted', function(req,res){
-
-      //saving data in database
-
-      var MongoClient = require('mongodb').MongoClient;
-
-      var bcrypt = require("bcrypt");
-
-      var url = 'mongodb://localhost';
-
-	//connect mongobd
-      MongoClient.connect(url, function (err, client) {
-
-	//throw error
-      		if(err) throw err;
-
-          else{
-	//use mybookshopdb database
-            var db = client.db('myappdb');
-
-	     //collect user and remove that user and their details from the database
-          	db.collection("user").remove({"username" : req.body.username});
-
-            
-	//send a confirm message
-            res.send("User "+ req.body.username+" has been removed from the system"+ "<br><a href='./'>Home</a>");     
-
-	//close database
-            client.close();
-                    
-          }     
-
-      });
-
-  });
+//------------ logout ----------------
 
 //logout route                                                                                                  
 app.get('/logout', redirectLogin, (req,res) => {
@@ -404,24 +431,23 @@ app.get('/logout', redirectLogin, (req,res) => {
 
      }
 
-     res.send('you are now logged out. <a href='+'./'+'>Home</a>');
+     res.render("message.ejs",{title:"YOU ARE NOW LOGGED OUT", message:""});
 
      })
 
    })                                                                                                  
-                  /////                                                                                
- app.get('/addfood', redirectLogin, function (req, res) {
 
-                                                                                                                                                                                           
+   //------------ logout done ------------
+
+
+//----------- add food ---------------
+ app.get('/addfood', redirectLogin, function (req, res) {
 
         res.render('addfood.html');
 
-                                                                                                                                                                                           
-
     });                                                     
-                                                                                                                                        
     
-//added book page, 
+//added food page, 
     app.post('/foodadded', function (req, res) {
 
         // saving data in database
@@ -435,28 +461,42 @@ app.get('/logout', redirectLogin, (req,res) => {
 	   //throw error
             if (err) throw err;
 
-	   //use mybookshopsdb database
+	   //use myappdb database
             var db = client.db('myappdb');
 
-	  //insert book name and price to database
+	  //insert food name and nutritional fact to database
+      db.collection("food").findOne({"name":req.body.name},(err, result)=>{
+          if(err) throw err;
+          console.log(result)
+          if(result==null){
             db.collection('food').insertOne({
                 name: req.body.name,
-                amount: req.body.amount,
-		unit: req.body.unit,
-		calories: req.body.calories,
-		carbs: req.body.carbs,
-		fat: req.body.fat,
-		protein: req.body.protein,
-		salt: req.body.salt,
-		sugar: req.body.sugar,
+                unit: req.body.unit,
+                calories: req.body.calories,
+                carbs: req.body.carbs,
+                fat: req.body.fat,
+                protein: req.body.protein,
+                salt: req.body.salt,
+                sugar: req.body.sugar,
+                user: req.session.userId
 
             });
+            res.render("message.ejs",{title:"Added", message:"Food "+ req.body.name+" has been added to the database!"});
 
-	   //close the database
-            client.close();
+          }else{
+            res.render("message.ejs",{title:"FOOD ALREADY EXISTS", message:req.body.name +' already exists! Please check the food list for all information'});
 
-	  //send a confirmation message with book name and price
-            res.send(' This food is added to the database, name: ' + req.body.name + ' Amount: ' + req.body.amount + req.body.unit +'<br />'+'Please check the food list for all information'+ '<br>' + '<a href=' + './' + '>Home</a>' );
+          }
+        //close the database
+          client.close();
+      })
+
+
+
+
+	  //send a confirmation message 
         });
     });
 }
+
+//-------------- add food done -----------------

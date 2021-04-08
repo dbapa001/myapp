@@ -8,93 +8,116 @@
 
 	<link rel="stylesheet" type="text/css" href="./style/style.css"/>
 
-  </head>
+	</head>
 
-    <h1> Calorie Buddy </h1>
+	<body>
+		<h1> Calorie Buddy </h1>
+		<nav>
+			
+			<a href= '/'>Home</a>
 
-<body>
+			<a href='/about'>About </a>
 
+			<a href='/register'>Register </a>
 
-<h2> List Page</h2>
+			<a href='/login'>Login </a>
 
+			<a href='/addfood'>Add Food </a>
 
+			<a href='/search'>Search Food</a>
 
-	<a href= '/'>Home</a>
+			<a href='/update'>Update Food</a>
 
-                                                                                                                                                                                                                  
+			<a id="currentPage" href='/list'>Food List </a>
 
-	<a href='/about'>About </a>
+			<a href='/api'>Api </a>
 
-                                                                                                                                                                                                                  
+			<a href='/logout'>Logout </a>
 
-<a href='/register'>Register </a>
+		</nav>
 
-                                                                                                                                                                                                                  
+		<section class="contentSection">
 
-<a href='/login'>Login <a>
+			
+			<h3 class="title">FOOD LIST PAGE</h3>
+			<p>You can see names and the nutritional facts here:</p>                                                                                                     
+                         
+			<table style="width: 100%">
+				<tr>
+					<th></th>
+					<th>Amount</th>
+					<th>Food Name</th>
+					<th>Unit</th>
+					<th>Calorie</th>
+					<th>Carbs</th>
+					<th>Fat</th>
+					<th>Protein</th>
+					<th>Salt</th>
+					<th>Sugar</th>
+				</tr>
 
-                                                                                                                                                                                                                  
+				<% availablefood.forEach(function(food){ %>
 
-<a href='/addfood'>Add Food </a>
+				<tr>
+					<td><input class="checkbox" type = "checkbox"></td>
+					<td><input class="amount" min="0" type="number"></td>
+					<td> <%= food.name %> </td>
+					<td> <%= food.unit %> </td>
+					<td class="calories"> <%= food.calories %> </td>
+					<td class="carbs"> <%= food.carbs %> </td>
+					<td class="fat"> <%= food.fat %> </td>
+					<td class="protein"> <%= food.protein %> </td>
+					<td class="salt"> <%= food.salt %> </td>
+					<td class="sugar"> <%= food.sugar %> </td>
 
-                                                                                                                                                                                                                  
-
-<a href='/search'>Search Food</a>
-
-                                                                                                                                                                                                                  
-
-<a href='/update'>Update Food</a>
-
-                                                                                                                                                                                                                  
-
-<a href='/list'>Food List </a>
-
-                                                                                                                                                                                                                  
-
-<a href='/api'>Api </a>
-
-                                                                                                                                                                                                                  
-
-<a href='/logout'>Logout </a>
-
-
-
-<br>   <h3>You can see names and the nutritional facts here:</h3>                                                                                                     
-                                                                                                       
-                                                                                                       
-
-
-<ul>
-                                                                                                                                                              
-                                                                                                     
-              <% availablefood.forEach(function(food){ %>
-                                                                                                       
-                                                                                                       
-                                                                                                  
-              <li> Name: <%= food.name %>,
-		 Amount: <%= food.amount %>,
-		 Unit: <%= food.unit %>,
-		 Calorie: <%= food.calories %>,
-		 Carbs: <%= food.carbs %>,
-		 Fat: <%= food.fat %>,
-		 Protein: <%= food.protein %>,
-		 salt: <%= food.salt %>,
-		 Suger: <%= food.sugar %> <br> </li>
-
-<br>
-                                                                                                       
-                                                                                                      
+				</tr>
+                                                                                                                                                                                             
                                                                                                        
              <% }) %> 
-														<ul>
+						
+			</table>
+
+			<input class="calculate" type = "submit" value = "Total" />
+
+			<h2>Total:</h2>
+
+			<table style="width: 100%">
+				<tr>
+					<th>Total Calorie</th>
+					<th>Total Carbs</th>
+					<th>Total Fat</th>
+					<th>Total Protein</th>
+					<th>Tostal Salt</th>
+					<th>Total Sugar</th>
+				</tr>
+
+			
+				<tr>
+					<td class="totalCalories"> 0 </td>
+					<td class="totalCarbs"> 0 </td>
+					<td class="totalFat"> 0 </td>
+					<td class="totalProtein"> 0 </td>
+					<td class="totalSalt"> 0 </td>
+					<td class="totalSugar"> 0 </td>
+
+				</tr>
+                                                                                                                                                                                             
+                                                                                                       
+						
+			</table>
+
+			
 
 
-  </body>                                                                 
-                                                                                 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                          
-                                                                                                                                    
-                                                                                                                                          
-                                                                                                                                           
+		
+		</section>
+		<footer>
+			<div class="reference">
+				<p>Design by Diana</p>
+		   </div>
+	   </footer>
+	   <script src="./calculation.js"></script>
+	
+	</body>                                                                                                                                                                                                          
                                                                                                                                       
 </html>

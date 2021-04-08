@@ -9,19 +9,18 @@
 
   </head>
 
+  <body>
      <h1> Calorie Buddy </h1>
 
-  <body>
 
-<h2>Login Page</h2>
-
+     <nav>
 <a href= '/'>Home</a>
                                                                                                                                                                                                                   
 <a href='/about'>About </a>
                                                                                                                                                                                                                   
 <a href='/register'>Register </a>
                                                                                                                                                                                                                   
-<a href='/login'>Login <a>
+<a id="currentPage" href='/login'>Login </a>
                                                                                                                                                                                                                   
 <a href='/addfood'>Add Food </a>
                                                                                                                                                                                                                   
@@ -36,49 +35,37 @@
 <a href='/logout'>Logout </a>
                                                                                                                                                                                  
                                                                                                                                                                                                                                                                                                                                                                                                      
-
+</nav>
                                                                                                                                                                                                            
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                               
-                                                                                                                                                                                                               
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                        
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                            
-                                                                                                                                                                                                                  
-                                                                                                                                                                                                            
-                                                                                                                                                                                                             
-                                                                                                                                                                                                                 
-                     <br>                                                                                                                                                                                           
+ <section class="contentSection">
 
+<form method="POST" action="/loggedin">
+   <h3 class="title">LOGIN PAGE</h3>                                                                                                                                                                                                                                                                                                                                                                                   
+                                        
    <p>Please Enter username and password to login: </p><br>
 
 <br>
-
-                                                                                                                                            
-
-<form method="POST" action="/loggedin">
-                                                                                                                                           
                                                                                                                                          
-UserName: <input id="username" type="text" name="username" value="username" /><br>
+<input id="username" type="text" name="username" placeholder="username" /><br>
                                                                                                                                             
 
-Password: <input id= "password" type = "text" name = "password" value = "8 Characters or more" /><br>
+<input id= "password" type = "password" name = "password" placeholder = "Password(8 Characters or more)" /><br>
                                                                                                                                           
-<input type = "submit" value = "Login" />                                                                                                                                            
+<input class="submit" type = "submit" value = "Login" />                                                                                                                                            
 
 </form>
 
 <p>If you want to register please <a href='/register'>Click Here</a></p>
                                                                                                                                                                                                             
-                                                                                       
+             
+</section>  
+<footer>
+   <div class="reference">
+      <p>Design by Diana</p>
+  </div>
+</footer>
+
 </body>
-                                                                                                                                 
-                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                  
                                       
                                                                                                                                               
 </html>

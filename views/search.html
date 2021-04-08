@@ -9,12 +9,13 @@
 
   </head>
 
-  <h1> Calorie Buddy </h1>
 
   <body>
 
-<h2>Search Page</h2>
+    <h1> Calorie Buddy </h1>
 
+
+<nav>
 <a href= '/'>Home</a>
                                                                                                                                                                                                                   
 
@@ -26,7 +27,7 @@
 
                                                                                                                                                                                                                   
 
-<a href='/login'>Login<a>
+<a href='/login'>Login</a>
 
                                                                                                                                                                                                                   
 
@@ -34,7 +35,7 @@
 
                                                                                                                                                                                                                   
 
-<a href='/search'>Search Food</a>
+<a id="currentPage" href='/search'>Search Food</a>
 
                                                                                                                                                                                                                   
 
@@ -52,16 +53,30 @@
 
 <a href='/logout'>Logout</a>
 
-<br> <br>
-   < p>Please search what are you looking for</p>
+</nav>
+
+<section class="contentSection">
+
+   
 	<form action="/searchresult" method="GET">
 
+    <h3 class="title">SEARCH PAGE</h3>
+    <p>Please search what are you looking for</p>
 
-	<input id="search-box" type="text" name="keyword" value="Food name" >
+	<input id="search-box" type="text" name="keyword" placeholder="Food name" >
 
-    	<input type="submit" value="OK" >
+    	<input class = "submit" type="submit" value="OK" >
 
   </form>
+
+</section>
+
+<footer>
+  <div class="reference">
+    <p>Design by Diana</p>
+ </div>
+</footer>
+
   </body>
 
                                                                        

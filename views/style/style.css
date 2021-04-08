@@ -2,22 +2,105 @@ body{
 
 	margin: 0;
 
-	padding: 0;
+	padding: 20px;
 
-	font-family:sans-serif;
-	
+	font-family:sans-serif;	
 
+	background-image: url(https://health.clevelandclinic.org/wp-content/uploads/sites/3/2019/06/cropped-GettyImages-643764514.jpg);
     
 
 }
 
+
+nav{
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+}
+
+
+nav a{
+	flex: 1;
+	background-color: crimson;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	display: flex;
+	align-items:center;
+	justify-content:center;
+	padding: 5px;
+	border-radius: 5px;
+	margin:10px; 
+}
+
+nav a:hover{
+	background-color: rgb(138, 10, 36);
+}
+
+nav #currentPage{
+	background-color: rgb(138, 10, 36);
+}
+
+.contentSection{
+	padding: 30px;
+	color: white;
+	background-color: rgb(138, 10, 36);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.contentSection h3, .contentSection p{
+	color: white;
+	text-align: center;
+}
+
+form{
+
+	text-align: center;
+
+    padding-right: 20px;
+
+	font-style:normal;
+
+    padding-bottom: 10px;
+
+	
+
+}
+
+.contentSection form{
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(85, 3, 20);
+	padding: 40px;
+}
+
+.contentSection form input{
+	flex: 1;
+	margin: 2px;
+	border-radius: 2px;
+	padding: 5px;
+	border: none;
+}
+
+.submit{
+	color: white;
+	background-color: rgb(41, 4, 12);
+}
+
+.title{
+	font-size: xx-large;
+	margin: 0px;
+
+}
 
 
 /*top Heading*/
 
 h1{
 
-	color: #eb8360; 
+	color: white; 
 
 	text-align: center;
 
@@ -26,7 +109,6 @@ h1{
 	background-repeat: no-repeat;
 
 	width: 100hv;
-	background-color: #ffffff;
 
 	padding-top: 5px;
 
@@ -73,7 +155,7 @@ nav{
 
     font-size: 20px;
 
-    background-color: aqua;
+
 
     
 
@@ -85,14 +167,9 @@ nav{
 /*footer*/
 
 footer{
-
 	display: block;
-
 	width: 100%;
-
-	height: 10px;
-
-	position: absolute;
+	background-color: rgb(70, 2, 15);;
 
 	text-align: center;
 
@@ -102,7 +179,6 @@ footer .reference{
 
 	
 
-	color: black;
 
 	height: 30px;
 
@@ -118,6 +194,13 @@ footer .reference{
 
 }
 
+footer p{
+	color: white;
+	margin: 0px;
+	text-align: center;
+
+}
+
 .about{
 
 	padding: 1px 40px;
@@ -130,7 +213,7 @@ footer .reference{
 
 
 
-ul1{
+.ul1{
 
     float: right;
 
@@ -144,7 +227,7 @@ ul1{
 
 
 
-ul1 li{
+.ul1 li{
 
     display: inline-block;
 
@@ -152,7 +235,7 @@ ul1 li{
 
 
 
-ul1 li a{
+.ul1 li a{
 
     color: black;
 
@@ -174,7 +257,7 @@ ul{
 
 	padding-left :10px;
 
-	color: black;
+	color: white;
 
 	list-style: none;
 
@@ -223,9 +306,6 @@ ul li a{
 
 }
 
-a:hover{
-
-	color: red;} /*when mouse is in top make it red*/
 
 
 
@@ -251,20 +331,21 @@ p{
 
 }
 
-
-
-
-
-form{
-
-	text-align: center;
-
-    padding-right: 20px;
-
-	font-style:normal;
-
-    padding-bottom: 10px;
-
-	
-
+th{
+    font-size: 1em;
+    color: white;
+    border-collapse: collapse;
+    text-align: center;
 }
+
+td{
+    border: solid;
+    text-align: center;
+}
+table{
+    margin-top: 20px;
+	padding-right: 20px;
+    border: solid;
+    border-collapse: collapse;
+
+

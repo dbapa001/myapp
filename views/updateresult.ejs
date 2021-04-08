@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+
+    <title>update result</title>
+
+<link rel="stylesheet" type="text/css" href="./style/style.css"/>                                                                          
+
+  </head>
+<body>
+                                                                          
+
+    <h1>Calorie Buddy</h1>
+
+                                                                        
+
+<nav>
+
+<a href= '/'>Home</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/about'>About </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/register'>Register </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/login'>Login </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/addfood'>Add Food </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/search'>Search Food</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/update'>Update Food</a>
+
+                                                                                                                                                                                                                  
+
+<a href='/list'>Food List </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/api'>Api </a>
+
+                                                                                                                                                                                                                  
+
+<a href='/logout'>Logout </a>
+
+</nav>
+
+    <section class="contentSection">                                                            
+        <form class="form" method="POST" action="/updatefood"> 
+          <h3 class="title">UPDATE RESULT PAGE</h3>                                                               
+          <p>The result of the food you are looking to update: </p>
+          <input id="name" type="text" name="name" placeholder="name" value=<%=food.name %> />
+          <br/>
+          <input id= "unit" type="text" name="unit" placeholder = "unit" value=<%=food.unit %> />
+          <br/>
+          <input id="calories" type="text" name="calories" placeholder = "calories" value=<%=food.calories %> />
+          <br/>
+          <input id="carbs" type="text" name="carbs" placeholder = "carbs" value=<%=food.carbs %> />
+          <br/>
+          <input id="fat" type="text" name="fat" placeholder = "fat" value=<%=food.fat %> />
+          <br/>
+          <input id = "protein" type="text" name= "protein" placeholder="Protein" value=<%=food.protein %> />
+          <br/>
+          <input id="salt" type="text" name="salt" placeholder = "salt" value=<%=food.salt %> />
+          <br/>
+          <input id="sugar" type="text" name="sugar" placeholder = "sugar" value=<%=food.sugar %> />
+        
+          <input class="submit" type = "submit" value = "Change" />
+          <input class="submit" type = "submit" value = "Delete" />
+        
+        
+                                                                             
+        </form>
+        </section>    
+
+                                                                          
+
+  </body> 
+  
+  <script>
+      var formButton = document.querySelectorAll(".submit").forEach(function(button){
+        button.addEventListener("click",function(){
+            var form = document.querySelector(".form");
+            if(button.value=="Change"){
+                form.action="/updateSelectedFood"
+            }   
+            if(button.value=="Delete"){
+                form.action="/deleteSelectedFood"
+            }
+        })
+      })
+  </script>
+
+</html>

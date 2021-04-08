@@ -1,0 +1,51 @@
+<!doctype html>       <!-- document type-->
+
+<html>		<!--root Html documnet-->
+
+  <head>	<!--info of the docment-->
+	
+
+    <title>message</title> 
+	<link rel="stylesheet" type="text/css" href="./style/style.css"/>
+
+  </head>
+
+<body>
+
+<h1> Calorie Buddy </h1> 
+ 
+<!-- link to other pages-->
+<nav>
+	<a id="currentPage" href= '/'>Home</a>
+	<a href='/about'>About </a>
+	<a href='/register'>Register </a>
+	<a href='/login'>Login </a>
+	<a href='/addfood'>Add Food </a>
+	<a href='/search'>Search Food</a>
+	<a href='/update'>Update Food</a>
+	<a href='/list'>Food List </a>
+	<a href='/api'>Api </a>
+	<a href='/logout'>Logout </a>
+
+</nav>
+
+
+
+<section class = "contentSection">
+	<h3 class="title"><%=title.toUpperCase()%></h3> 
+    <%if (message!=null){ %>
+     <p><%=message %></p>
+    <%}%>
+
+
+</section>
+
+<footer>
+	 <div class="reference">
+		 <p>Design by Diana</p>
+	</div>
+</footer>
+
+</body>
+
+</html>
